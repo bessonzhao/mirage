@@ -1,0 +1,14 @@
+---
+version: '2'
+
+services:
+    jenkins:
+        image: crocof/mirage
+        build: docker
+        volumes:
+            - "./.data/jenkins-home:/var/jenkins_home"
+            - "./build:/var/jenkins_home/userContent/mirage"
+        restart: on-failure:5
+        network_mode: bridge
+        environment:
+            DNSDOCK_ALIAS: mirage.docker

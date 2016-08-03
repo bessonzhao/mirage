@@ -1,7 +1,0 @@
----
-
-- src: geerlingguy.jenkins
-  path: vagrant/roles
-
-- src: geerlingguy.java
-  path: vagrant/roles

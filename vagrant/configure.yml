@@ -1,7 +1,0 @@
----
-
-- hosts: default
-  sudo: yes
-
-  roles:
-    - geerlingguy.jenkins

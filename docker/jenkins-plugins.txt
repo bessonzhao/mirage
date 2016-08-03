@@ -1,0 +1,2 @@
+jquery:1.11.2-0
+simple-theme-plugin:0.3
