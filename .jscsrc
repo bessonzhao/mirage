@@ -1,13 +1,23 @@
 {
-  "preset": "jquery",
-
-  // remove after https://github.com/jscs-dev/node-jscs/issues/1685
-  // and https://github.com/jscs-dev/node-jscs/issues/1686
-  "requireCapitalizedComments": null,
-
-  "excludeFiles": ["node_modules", "src/bower_components"],
-
-  "validateQuoteMarks": "'",
-
-  "disallowSpacesInsideParentheses": true
+    "preset": "jquery",
+    "requireDotNotation": {
+        "allExcept": ["snake_case", "keywords"]
+    },
+    "disallowSpaceAfterPrefixUnaryOperators": ["++", "--", "+", "-", "~"],
+    "disallowSpaceBeforePostfixUnaryOperators": true,
+    "maximumLineLength": 120,
+    "requireVarDeclFirst": true,
+    "requireSpaceAfterPrefixUnaryOperators": ["!"],
+    "requireSpacesInsideBrackets": null,
+    "requireSpacesInsideParentheses": {
+        "all": true,
+        "except": [ "{", "}", "[", "]", "function" ]
+    },
+    "requireYodaConditions": true,
+    "validateQuoteMarks": "'",
+    "requireCapitalizedComments": {
+        "allExcept": ["global", "exported", "jshint", "eslint", "jslint"]
+    },
+    "requireCamelCaseOrUpperCaseIdentifiers": true,
+    "requireBlocksOnNewline": true
 }

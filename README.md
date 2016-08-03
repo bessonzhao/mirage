@@ -1,7 +1,5 @@
 # Mirage
 
-**This is very much a work in progress! There is still a lot of work to be done in terms of tidying up the CSS and making the theme more configurable**
-
 A modern feeling theme for Jenkins CI server.
 
 ### Screenshots
@@ -14,7 +12,7 @@ A modern feeling theme for Jenkins CI server.
 
 ## Installation in Jenkins
 
-If you want everybody who accesses your Jenkins server to see this theme you will need access to install plugins and configure the system.
+If you want everybody who accesses your Jenkins server to see this theme you will need access to install a couple plugins and configure the system.
 
 1. Install [Jenkins Simple Theme Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Simple+Theme+Plugin)
 2. Install [jQuery Plugin](https://wiki.jenkins-ci.org/display/JENKINS/jQuery+Plugin)
@@ -31,13 +29,35 @@ http://<your-jenkins-url>:8080/userContent/mirage.min.js
 If you want to make modifications to the theme to better suit your branding or taste, you will need a few tools installed:
 
 * [NodeJS](http://nodejs.org)
-* [Grunt](http://gruntjs.com)
+* [Gulp](http://http://gulpjs.com)
 
-Optionally, if you want to use the Vagrant VM image to preview your changes you will need the following installed:
+There are a number of tasks available in Gulp. However, there are really only 3 you will need to run:
 
-* [Vagrant](http://vagrantup.com)
-* [VirtualBox](http://virtualbox.org)
-* [Ansible](http://ansible.com)
+```
+gulp
+```
+
+This will run the default task, which will lint the files, compile the Sass and JavaScript, copy required files into the `build` directory (which is mounted in the docker container) and refresh BrowserSync.
+
+```
+gulp build
+```
+
+This will lint the files, compile the Sass and JavaScript, copy required files into the `build` directory (which is mounted in the docker container).
+
+```
+gulp build --release
+```
+
+This will ensure all of the asset files are minified and no sourcemaps are generated. All of the minified files will be output to the `dist` directory.
+
+Optionally, if you want to use the [Docker](https://www.docker.com/) container to preview your changes you will need a working [Docker](https://www.docker.com/) environment
+
+There is a `docker-compose.yml` file in the root of the repo that will ensure all of the correct volumes are mounted in the container so the theme files are available. Simple run
+
+```
+docker-compose up
+```
 
 ### Styles
 
@@ -63,24 +83,10 @@ Generally it is agreed that using IDs for your CSS rules is bad practice. Howeve
 
 #### Vendor Prefixes
 
-We use the [Autoprefixer](https://www.npmjs.com/package/autoprefixer) module to add vendor prefixes to our CSS automatically. By default the browsers we'll add prefixes for are defined in the `browserslist` file. If you want to change the supported browsers when you build your CSS you can pass in an environment variable when running Grunt.
-
-```
-BROWSERSLIST="> 5%" grunt watch
-```
-
-### Vagrant Environment
-
-The Vagrantfile will create a CentOS 7 virtual machine and install Jenkins, the simple theme plugin and jquery plugin.
-
-It will also syncronise the `./build` directory in the repository to the `/var/lib/jenkins/userContent` directory in the virutal machine, allowing you to easily add the theme to the Jenkins and test updates to the styles and scripts.
-
-#### Ansible
-
-The Vagrantfile will require [Ansible to be installed](http://docs.ansible.com/ansible/intro_installation.html) and available in the path for the provisioning to run.
+We use the [Autoprefixer](https://www.npmjs.com/package/autoprefixer) module to add vendor prefixes to our CSS automatically. By default the browsers we'll add prefixes for are defined in the `COMPATIBILITY` constant in the `Gulpfile.js`.
 
 ## This is *NOT* an Attack on Jenkins
 
-This theme is not an attack or criticism of Jenkins of the developers of Jenkins in anyway! I've used a number of CI servers and I continue to be impressed how it matches and often beats the features and reliabilty of those others that charge for usage.
+This theme is not an attack or criticism of Jenkins of the developers of Jenkins in anyway! I've used a number of CI servers and I continue to be impressed how it matches and often beats the features and reliability of those others that charge for usage.
 
 I made this theme as a bit of fun and learning opportunity. I hope people like it and use it but this theme is useless without Jenkins, remember that.
